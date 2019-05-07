@@ -1,0 +1,112 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._]+$"
+        },
+        "automationAccountName": {
+            "required": true,
+            "type": "string"
+        },
+        "sourceControlName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The parameters supplied to the create or update source control operation.",
+            "properties": {
+                "properties": {
+                    "description": "The properties of the source control.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "autoSync": {
+                            "description": "The auto async of the source control. Default is false.",
+                            "type": "boolean"
+                        },
+                        "branch": {
+                            "description": "The repo branch of the source control. Include branch as empty string for VsoTfvc.",
+                            "maxLength": 255,
+                            "type": "string"
+                        },
+                        "description": {
+                            "description": "The user description of the source control.",
+                            "maxLength": 512,
+                            "type": "string"
+                        },
+                        "folderPath": {
+                            "description": "The folder path of the source control. Path must be relative.",
+                            "maxLength": 255,
+                            "type": "string"
+                        },
+                        "publishRunbook": {
+                            "description": "The auto publish of the source control. Default is true.",
+                            "type": "boolean"
+                        },
+                        "repoUrl": {
+                            "description": "The repo url of the source control.",
+                            "maxLength": 2000,
+                            "type": "string"
+                        },
+                        "securityToken": {
+                            "description": "The authorization token for the repo of the source control.",
+                            "properties": {
+                                "accessToken": {
+                                    "description": "The access token.",
+                                    "maxLength": 1024,
+                                    "type": "string"
+                                },
+                                "refreshToken": {
+                                    "description": "The refresh token.",
+                                    "maxLength": 1024,
+                                    "type": "string"
+                                },
+                                "tokenType": {
+                                    "description": "The token type. Must be either PersonalAccessToken or Oauth.",
+                                    "enum": [
+                                        "PersonalAccessToken",
+                                        "Oauth"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "tokenType"
+                                    }
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "sourceType": {
+                            "description": "The source type. Must be one of VsoGit, VsoTfvc, GitHub, case sensitive.",
+                            "enum": [
+                                "VsoGit",
+                                "VsoTfvc",
+                                "GitHub"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "sourceType"
+                            }
+                        }
+                    }
+                }
+            },
+            "required": [
+                "properties"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
